@@ -1,6 +1,6 @@
 from . import auth
-from flask import render_template,redirect,url_for
-from .forms import SignupForm
+from flask import render_template,redirect,url_for,flash,request
+from .forms import SignupForm,LoginForm
 from ..models import User
 from .. import db
 
@@ -17,4 +17,12 @@ def signup():
 
 @auth.route('/login')
 def login():
-  return render_template('login.html')
+  title='Log In'
+  form = LoginForm()
+  if form.validate_on_submit():
+    user = User.querry.filter_by(email = form.email.data).first()
+    if user is not None and user.verify_password(form.password.data):
+      login_user(user,form.remeber.data)
+      return redirect(request.args.get('next') or url_for('main.index'))
+    flash('invalid username or password')
+  return render_template('login.html',title=title,form=form)

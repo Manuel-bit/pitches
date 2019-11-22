@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField,validators
+from wtforms import StringField,PasswordField,SubmitField,validators,BooleanField
 from wtforms.validators import EqualTo,DataRequired
 from wtforms import ValidationError
 
@@ -17,3 +17,11 @@ class SignupForm(FlaskForm):
   def check_username(self,data_field):
     if User.query.filter_by(username = data_field).first():
       raise ValidationError('username taken, choose another username..')
+
+
+class LoginForm(FlaskForm):
+  email = StringField('email',[validators.DataRequired()])
+  password = PasswordField('Password',[validators.DataRequired()])
+  remember = BooleanField('remember me')
+  submit = SubmitField('Sign In')
+  
