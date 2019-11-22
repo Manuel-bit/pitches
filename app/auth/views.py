@@ -14,3 +14,7 @@ def signup():
     db.session.commit()
     return redirect(url_for('main.index'))
   return render_template('signup.html',form=form,title=title)
+
+@auth.route('/login')
+def login():
+  return render_template('login.html')
