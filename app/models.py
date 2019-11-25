@@ -10,6 +10,10 @@ class User(UserMixin,db.Model):
   username = db.Column(db.String(255))
   email = db.Column(db.String(255))
   pass_secure = db.Column(db.String(255))
+  bio= db.Column(db.String(255))
+  pitches= db.relationship('Pitch',backref = 'user',lazy='dynamic')
+
+
 
   @property
   def password(self):
@@ -19,7 +23,7 @@ class User(UserMixin,db.Model):
   def password(self,password):
     self.pass_secure = generate_password_hash(password)
 
-  def veify_password(self,password):
+  def verify_password(self,password):
     return check_password_hash(self.pass_secure,password)
 
   @login_manager.user_loader
@@ -30,4 +34,10 @@ class User(UserMixin,db.Model):
   def __repr__(self):
     return f'User {self.username}'
 
-  
+class Pitch(db.Model):
+  __tablename__ = 'pitches'
+  id = db.Column(db.Integer,primary_key = True)
+  title = db.Column(db.String(255),nullable = False)
+  pitch = db.Column(db.String(500),nullable = False)
+  category = db.Column(db.String(255),nullable = False)
+  user_id = db.Column(db.Integer,db.ForeignKey('users.id'))  
