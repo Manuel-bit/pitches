@@ -12,6 +12,7 @@ class User(UserMixin,db.Model):
   pass_secure = db.Column(db.String(255))
   bio= db.Column(db.String(255))
   pitches= db.relationship('Pitch',backref = 'user',lazy='dynamic')
+  comment = db.relationship('Comment',backref= 'user',lazy='dynamic')
 
 
 
@@ -40,4 +41,12 @@ class Pitch(db.Model):
   title = db.Column(db.String(255),nullable = False)
   pitch = db.Column(db.String(500),nullable = False)
   category = db.Column(db.String(255),nullable = False)
-  user_id = db.Column(db.Integer,db.ForeignKey('users.id'))  
+  user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+  comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
+
+class Comment(db.Model):
+  __tablename__ = 'Comments'
+  id = db.Column(db.Integer, primary_key=True)
+  comment = db.Column(db.String(500))
+  pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))  
+  user_id = db.Column(db.Integer,db.ForeignKey('users.id'))

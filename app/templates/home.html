@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% for pitch in general %}
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{pitch.title}} <span class="category" style="float: right;">{{pitch.category}}</span></h5>
+      <p class="card-text">{{pitch.pitch}}</p>
+      <p class="text-secondary">Dont have an acount..? <a href="{{url_for('auth.signup')}}">Comment</a></p>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}
