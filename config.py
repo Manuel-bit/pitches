@@ -12,6 +12,8 @@ class ProdConfig(Config):
   class that defines configuarations for production stage
   '''
   SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+  # simple mde  configurations
+  
 
 class DevConfig(Config):
   '''
