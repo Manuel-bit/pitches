@@ -2,24 +2,24 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
-  <div class="container-fluid comment" style="text-align: center;">
-    <div class="card" style="width: 50rem;">
+  <div class="container-fluid" id="comment">
+    <div class="card bg-transparent" style="width: 50rem;">
       <div class="card-body">
-        <h5 class="card-title">{{pitch.title}} <span class="category" style="float: right;">{{pitch.category}}</span></h5>
+        <h5 class="card-title">{{pitch.title}}</h5>
         <p class="card-text">{{pitch.pitch}}</p>
       </div>
       <div class="cmt" style="width: 50%;">
         {{wtf.quick_form(form)}}
       </div> 
     </div>
-    <h3>Comments</h3>
+    <div class="pitch-comments">
+    <h3 style="color: bisque; margin-left: 40%;">Comments</h3>
     {% for cmt in comments %}
-      <div style="border:10px solid lightseagreen; padding:20px; border-radius: 20px; width: 40%;">
+      <div style="border:10px solid lightseagreen; padding:20px; border-radius: 20px; width: 40%;" id="crd">
         <p style="color: aqua;">{{cmt.comment}}</p>
         <p style="color: aqua; float: right;"> by:{{cmt.user.username}}</p>
       </div>
     {% endfor %}
-
-      
+    </div>  
   </div>
 {% endblock %}

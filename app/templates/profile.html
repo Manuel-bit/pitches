@@ -1,4 +1,38 @@
 {% extends 'base.html'%}
 {% block content %}
+<div class="container" style="color: bisque;">
+<div class="row">
+<!-- displaying  Username-->
+  <div class="col-md-4">
+    <h3> {{user.username| capitalize}} </h3>
 
+    <!--Displaying user bio-->
+    {% if user.bio %}
+      <p> {{user.bio}}</p>
+    {%else%}
+      <p> {{user.username| capitalize}} has no bio </p>
+    {% endif %}
+  </div>
+
+  <!--Display profile photo-->
+  <div class="col-md-4">
+
+    {% if user.profile_pic_path %}
+    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+    {%else%}
+    <p>No profile picture</p>
+    {% endif %}
+  </div>
+</div>
+<div class="container-fluid">
+  {% for ptch in pitches %}
+  <div class="card border-info mb-7 bg-transparent" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ptch.title}}</h5>
+      <p class="card-text">{{ptch.pitch}}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
 {% endblock %}

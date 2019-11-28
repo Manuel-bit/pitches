@@ -40,4 +40,12 @@ body{
   border-radius: 5px;
 }
 
-
+.pitch-comments #crd{
+  padding: 20px;
+  margin: 20px;
+  position: relative;
+  display: inline-block;
+}
+#comment .card{
+  margin-left: 23%;
+}
