@@ -1,13 +1,22 @@
 {% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename = 'css/home.css')}}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
 
 {% block content %}
-  {% for pitch in general %}
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">{{pitch.title}} <span class="category" style="float: right;">{{pitch.category}}</span></h5>
-      <p class="card-text">{{pitch.pitch}}</p>
-      <p class="text-secondary">Dont have an acount..? <a href="{{url_for('auth.signup')}}">Comment</a></p>
-    </div>
+  <div class="container-fluid all-pitches">
+      {% for pitch in general %}
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{pitch.title}} <span class="category" style="float: right;">{{pitch.category}}</span></h5>
+          <p class="card-text">{{pitch.pitch}}</p>
+        </div>
+        {{wtf.quick_form(form)}}
+      </div>
+      {% endfor %}
   </div>
-  {% endfor %}
 {% endblock %}

@@ -1,0 +1,47 @@
+.all-pitches{
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  margin: 20px;
+  background-image: url('../imgs/img1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.login{
+  display: flex;
+  justify-content: center;
+}
+.categories{
+  list-style: none;
+  display: inline;
+}
+li{
+  display: inline;
+  
+  padding: 20px;
+}
+/* #categories{
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  background-image: url('../imgs/img1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+.pitch-form{
+  display: flex;
+  justify-content: center;
+
+}
+body{
+  background-image: url('../imgs/img1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.card {
+  position: relative;
+  display: inline-block;
+  margin:10px;
+  border-radius: 5px;
+}

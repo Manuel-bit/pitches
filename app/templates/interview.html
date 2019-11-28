@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+<div id="categories">
+  {%for pitch in inteview %}
+  <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{pitch.title}} <span class="category" style="float: right;">{{pitch.category}}</span></h5>
+        <p class="card-text">{{pitch.pitch}}</p>
+      </div>
+      {{wtf.quick_form(form)}}
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}

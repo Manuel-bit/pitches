@@ -9,14 +9,34 @@
         <a class="nav-link" href="{{url_for('main.index')}}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{url_for('auth.login')}}">Log In</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="{{url_for('main.pitch')}}">New Pitch</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            categories
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ url_for('main.fun')}}">Fun</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ url_for('main.pick_up')}}">Pick Up Lines</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ url_for('main.inteview')}}">interviews</a>
+          </div>
+        </li>
+        {% if current_user.is_authenticated %}
+        <div>
+          <li class="nav-item">
+            <a class="nav-link" href="#">{{current_user.username}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('auth.logout')}}">Log Out</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('auth.login')}}">Log I  n</a>
+          </li>
+        </div>
+        {% endif %}
     </ul>
   </div>
 </nav>
