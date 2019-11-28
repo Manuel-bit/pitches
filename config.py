@@ -3,7 +3,6 @@ class Config:
   '''
   class that defines generall application configuarations
   '''
-  SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://emmanuel:lilfranken@localhost/pitches'
   SECRET_KEY = os.environ.get('SECRET_KEY')
   
 
@@ -19,6 +18,7 @@ class DevConfig(Config):
   '''
   class that defines configuarations during development stage
   '''
+  SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://emmanuel:lilfranken@localhost/pitches'
   DEBUG=True
 
 config_options = {
