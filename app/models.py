@@ -4,7 +4,6 @@ from flask_login import UserMixin
 
 @login_manager.user_loader
 def load_user(user_id):
-  print(User.query.get(int(user_id)),'00000000000000000000000')
   return User.query.get(int(user_id))
 
 class User(db.Model,UserMixin):
@@ -19,12 +18,6 @@ class User(db.Model,UserMixin):
   comment = db.relationship('Comment',backref= 'user',lazy='dynamic')
 
 
-
-  # @property
-  # def password(self):
-  #   raise AttributeError('you cannot read the password attribute')
-
-  # @password.setter
   def password(self,password):
     self.pass_secure = generate_password_hash(password)
 

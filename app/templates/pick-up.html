@@ -4,12 +4,12 @@
 {% block content %}
 <div id="categories">
   {%for pitch in pick_up_lines %}
-  <div class="card" style="width: 18rem;">
+  <div class="card border-info mb-7 bg-transparent" style="width: 18rem;">
       <div class="card-body">
-        <h5 class="card-title">{{pitch.title}} <span class="category" style="float: right;">{{pitch.category}}</span></h5>
+        <h5 class="card-title">{{pitch.title}}</h5>
         <p class="card-text">{{pitch.pitch}}</p>
       </div>
-      {{wtf.quick_form(form)}}
+      <p class="text-secondary"> <a href="{{url_for('main.comment',id=pitch.id)}}" style="color: aquamarine;">add comment</a></p>
     </div>
   {% endfor %}
 </div>

@@ -11,26 +11,22 @@ def index():
 
 
 @main.route('/home',methods=['GET','POST'])
+@login_required
 def home():
-  form = CommentForm()
-  print(current_user)
-  if form.validate_on_submit():
-    comment = Comment(comment=form.comment.data)
-    db.session.add(comment)
-    db.session.commit()
   general = Pitch.query.all()
-  return render_template('home.html',general=general,form=form)
+  return render_template('home.html',general=general)
 
 
 @main.route('/pitch',methods=['GET','POST'])
 @login_required
 def pitch():
+  user = current_user.id
   form = PitchForm()
   if form.validate_on_submit():
-    pitch = Pitch(title=form.title.data,pitch=form.pitch.data,category=form.category.data)
+    pitch = Pitch(title=form.title.data,pitch=form.pitch.data,category=form.category.data,user_id=user)
     db.session.add(pitch)
     db.session.commit()
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.home'))
   return render_template('pitch.html',form=form)
 
 @main.route('/fun')
@@ -47,8 +43,22 @@ def pick_up():
 
 @main.route('/inteview')
 def inteview():
+  interview = Pitch.query.filter_by(category = 'interview').all()
+  return render_template('interview.html',interview=interview)
+
+@main.route('/comment/<id>',methods=['GET','POST'])
+def comment(id):
+  user = current_user.id
+  pitch = Pitch.query.filter_by(id=id).first()
   form = CommentForm()
-  interview = Pitch.query.filter_by(category = 'inteview').all()
-  return render_template('interview.html',interview=interview,form=form)
+  if form.validate_on_submit():
+    cmt = Comment(comment=form.comment.data,user_id=user,pitch_id=id)
+    db.session.add(cmt)
+    db.session.commit()
+    comments = Comment.query.filter_by(pitch_id=id).all()
+    return render_template('comment.html',pitch=pitch,form=form,commenst=comments)
+  comments = Comment.query.filter_by(pitch_id=id).all()
+  return render_template('comment.html',form=form,pitch=pitch,comments=comments)
+
 
 
